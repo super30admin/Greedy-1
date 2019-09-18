@@ -24,4 +24,22 @@ class Solution {
         }
         return false;
     }
+// Time : O(n) 
+// Space : O(1)
+// LeetCode: Yes
+
+// Approach
+// 1.Initially have finalpos as last index.Start from last before index and check if final position can be reached from this index
+// 2.If it can be rached from this position then update finalpos to the current index , we need to check if this position can be reached 
+//   from it's previous index. If it can't be reached then finalpos remains same and move on to the previous index of current index.
+// 3. Finally if finalpos is index 0 i.e start position , then we reach final position , so return true else false.
+     public boolean canJump2(int[] nums) {
+        if(nums.length<=1)  return true;
+        int finalpos = nums.length-1;
+        for(int i = nums.length-2;i>=0;i--){
+            if(i+nums[i]>=finalpos) finalpos = i;
+        }
+        if(finalpos == 0)   return true;
+        return false;
+    }
 }
