@@ -1,6 +1,7 @@
 //TC - exponential
 //SC - O(1)
 //Problems Faced - TLE
+//Greedy with Backtracking
 
 class Solution {
     public boolean canJump(int[] nums) {
@@ -31,5 +32,48 @@ class Solution {
         }
         
         return flag;
+    }
+}
+
+
+//TC - O(n^2)
+//SC - O(n^2)
+//Problems Faced - MLE
+// DP
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length < 2) return true;
+        
+        Set<Integer> st = new HashSet<>();
+        st.add(0);
+        
+        int[][] dp = new int[nums.length-1][nums.length];
+        
+        for(int i = 0; i < nums.length-1; ++i)
+        {
+            for(int j = 0; j < nums.length; ++j)
+            {
+                if(st.contains(i))
+                {
+                    if(j == i) dp[i][j] = 1;
+                    else if(j > i)
+                    {
+                        if(j <= i + nums[i])
+                        {
+                            dp[i][j] = 1;
+                            st.add(j);
+                        }
+                    }
+                }
+            }
+        }
+        
+        for(int i = 0; i < nums.length-1; i++)
+        {
+            if(dp[i][nums.length-1] == 1) return true;
+        }
+        
+        return false;
     }
 }
