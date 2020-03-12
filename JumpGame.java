@@ -77,3 +77,22 @@ class Solution {
         return false;
     }
 }
+
+//TC - O(n)
+//SC - O(1)
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length < 2) return true;
+        int dest = nums.length -1;
+        int i = nums.length - 2;
+        while(i >= 0)
+        {
+            if(i + nums[i] >= dest)
+                dest = i;
+            --i;
+        }
+        if(dest == 0) return true;
+        return false;
+    }
+}
