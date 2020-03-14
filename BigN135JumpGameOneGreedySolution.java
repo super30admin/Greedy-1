@@ -1,5 +1,5 @@
 //Time complexity is O(N)
-//Space complexity is O(N)
+//Space complexity is O(1)
 //This solution is submitted on leetcode
 
 public class BigN135JumpGameOneGreedySolution {
