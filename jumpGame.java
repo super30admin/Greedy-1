@@ -4,12 +4,6 @@
 # Any problem you faced: No
 
 
-
-
-
-
-
-
 class Solution {
     public boolean canJump(int[] nums) {
 
