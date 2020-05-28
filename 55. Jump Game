@@ -1,0 +1,16 @@
+Time complexity: O(n)
+Space complexity: O(1)
+Did this code successfully submitted on leetcode: Yes
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        int dest = nums.length-1;
+        
+        for(int j = nums.length-2; j>=0; j--){
+            if(j+nums[j]>=dest)
+                dest = j;
+        }
+        
+        return dest == 0;
+    }
+}
