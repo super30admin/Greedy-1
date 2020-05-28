@@ -6,7 +6,7 @@
 
 // Your code here along with comments explaining your approach
 Algorithm Explanation
-Given below
+Given below(Greedy optimized)
 """
 
 class Solution:
@@ -21,22 +21,46 @@ class Solution:
                 - if fn(arr, pos+i) 
                     return True
             return False
+
+        Time - O(N2) - Because we are trying to find good index for every position, lookin
+        at the next nums[i] elements
+        Space - O(N)
         """
         memo = {}
         def helper(nums,i):
-            print(i,nums[i])
+            #print(i,nums[i])
+            #print(memo)
             if i in memo:
                 return memo[i]
-            if i == len(nums) - 1:
-                return True
-            if nums[i] == 0 and i < len(nums) - 1:
-                return False
-            
-            for pos in range(1,nums[i]+1):
-                if helper(nums, pos + i):
-                    memo[pos+i] = True
+            # if i == len(nums) - 1:
+            #     return True
+            # if nums[i] == 0 and i < len(nums) - 1:
+            #     #dead end cannot reach last index
+            #     return False
+            furthestJump = min(i + nums[i], len(nums) - 1)
+            for pos in range(i+1,furthestJump+1):
+                #print(i, pos)
+                #print(memo)
+                # if pos + i in memo:
+                #     return memo[pos+i]
+                if helper(nums, pos):
+                    memo[i] = True
                     return True
             memo[i] = False
             return False
         
-        return helper(nums,0)
+        memo[len(nums)-1]=True
+        f = helper(nums,0)
+        #print(memo)
+        return f
+
+        """
+        Greedy approach where we try to reach a good index from the right rather than searching
+        for every good index to reach the end( it's kind of similar simulation to recursive, since recursively, the truth values are filled from the right itself)
+        """
+        n = len(nums)
+        last_pos = n - 1
+        for i in range(n-2,-1,-1):
+            if nums[i] + i >= last_pos:
+                last_pos = i
+        return last_pos == 0
