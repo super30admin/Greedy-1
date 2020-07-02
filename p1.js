@@ -3,6 +3,7 @@
 // time: O(n)
 //space: O(1)
 
+
 const canJump = function(nums) {
     if(nums.length === 1) return true;
     let required = 1;
