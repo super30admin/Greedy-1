@@ -8,7 +8,7 @@
 // 1. Maintain left pointer at second last element and right pointer at last element
 // 2. Keep decreasing left pointer till element at left is not >= diff between left and right indices
 // 3. If left goes below 0 while searching return false else make right as left and decrement left
-
+	
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
