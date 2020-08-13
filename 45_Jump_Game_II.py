@@ -6,7 +6,7 @@
 
 # Your code here along with comments explaining your approach
 # 1. In curr_interval, I am trying to get closest to the end index
-# 2. In next_interval, holds the maximum next interval for a current_interval
+# 2. In next_interval, holds the maximum next interval for indexes within the current_interval
 #   In other words, after taking the  jump where is my next interval
 class Solution:
     def jump(self, nums: List[int]) -> int:
