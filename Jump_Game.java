@@ -24,7 +24,7 @@ class Jump_Game_DFS {
 	}
 }
 
-/**********************************************************************************/
+/*********************************Greedy Approach*************************************************/
 //Time Complexity :O(n)
 //Space Complexity : O(1)
 //Did this code successfully run on Leetcode : Time Limit Exceeded
