@@ -1,3 +1,18 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        return dfs(nums, 0);
+    }
+    private boolean dfs(int[] nums, int index){
+        //base
+        if(index == nums.length - 1) return true;
+        
+        //logic
+        for(int i = 1; i <= nums[index]; i++){
+            if(dfs(nums, index+i)) return true;
+        }
+        return false;
+    }
+}
 //TC: O(n)
 //SC: O(1)
 class Solution {
