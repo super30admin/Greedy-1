@@ -9,7 +9,9 @@
         # Optimized approach: 
                               
             # 1. 
-                    A) 
+                    A) Start from end that will reduct some calcualtios. Initially, destination will the end position.
+                    B) now, check whether nums[x]+x >= destination if it is then change the destination to x.
+                    C) At the end, check if destionatio == 0 if it is then we reached else not.
     */  
 
 class Solution {
