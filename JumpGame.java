@@ -1,41 +1,25 @@
-// Time Complexity : not clear on how to calculate
-// Space Complexity : O(n), recursion stack
-// Did this code successfully run on Leetcode : 74/75 passed, TLE
-// Any problem you faced while coding this : exiting when a solution is found
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
 
 // Your code here along with comments explaining your approach
-// clip elements to arr.length-1, greedily take max step and proceed
-// if reached end idx, mark reached
-// on successive calls if reached is true just return
+// keep desntination as nums.length-1
+// check if destination can be reached from previous index, if not check previous index, if yes update destionation
 
 class Solution {
-    int[] arr;
-    boolean reachable = false;
-    
     public boolean canJump(int[] nums) {
-        this.arr = nums;
+        if(nums==null || nums.length<=1)
+            return true;
         
-        for(int i=0; i<arr.length; i++){
-            arr[i] = Math.min(arr[i], arr.length-1);
-        }
+        int destination = nums.length-1;
         
-        helper(0);
-        return reachable;
-    }
-    
-    private void helper(int idx){
-        if(reachable==true)
-            return;
-        
-        if(idx==arr.length-1){
-            reachable = true;
-            return;
-        }
-        
-        for(int step=arr[idx]; step>=1; step--){
-            if(idx+step<=arr.length-1){
-                helper(idx+step);    
+        for(int i=nums.length-2; i>=0; i--){
+            if(i+nums[i]>=destination){
+                destination = i;
             }
         }
+        
+        return destination==0;
     }
 }
