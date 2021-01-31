@@ -1,0 +1,32 @@
+//TC: O(n)
+//SC: O(1)
+
+//Approach: Idea is to traverse right to left and update destinfation if reachable
+//if final destination is 0-->  we can reach to final index 
+
+class Solution {
+    public int jump(int[] nums) {
+        if(nums == null || nums.length <= 1){
+            return 0;
+        }
+        int jump = 1;   //inital minimum jump for arr of size 2
+        int currInterval = nums[0];
+        int bestInterval = nums[0];
+        
+        for(int i = 0 ; i < nums.length - 1; i++){
+            // System.out.println(" i: "   + i + " jump: "+ jump + " CI: " + currInterval + " BI: " + bestInterval);                   
+            if(i + nums[i] >= bestInterval){
+                bestInterval = i + nums[i];     //keep updating bestInterval with max reachable index
+            }
+            if(i == currInterval){              //if initial interval is travelled increment jump && update currentInterval to next max Interval i.e BestInterval
+                jump++;
+                currInterval = bestInterval;  
+            }
+            if(currInterval >= nums.length - 1){    //If we reach to destination within any interval --> return MIN jumps 
+                    break;
+               }
+        }
+        return jump;
+    }
+}
+

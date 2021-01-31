@@ -1,0 +1,34 @@
+//TC: O(n)
+//SC: O(n)  --> Additional array filled with 1
+
+//Approach: Idea is to traverse from L to R and increment index if > value found
+//2nd pass -> R to L -> update nums[] with max of nums[i] && nums[i+1] + 1;
+
+class Solution {
+    public int candy(int[] ratings) {
+        if(ratings == null || ratings.length == 0){
+            return 0;
+        }
+        
+        int count = 0;
+        int[] nums = new int[ratings.length];
+        Arrays.fill(nums,1);
+
+        for(int i = 1 ; i < ratings.length ; i++){
+            if(ratings[i] > ratings[i-1]){
+                nums[i] = nums[i-1] + 1;          //left to right --> if curr Element > prev element --> add prev index + 1 to currIndex
+            }
+        }
+
+        for(int j = ratings.length - 2 ; j>= 0 ; j--){
+            if(ratings[j] > ratings[j+1]){
+                nums[j] = Math.max(nums[j] , nums[j+1] + 1);    //right to left --> Use MAX to update the nums[]
+            }
+        }
+        
+        for(int k : nums){
+            count += k;     //Adding MIN candies required
+        }
+        return count;
+    }
+}

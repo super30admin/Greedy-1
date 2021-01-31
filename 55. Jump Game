@@ -1,0 +1,23 @@
+//TC: O(n);
+//SC: O(1)
+
+//Approach: Idea is to traverse right to left and update destinfation if reachable
+//if final destination is 0-->  we can reach to final index 
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length <= 1){
+            return true;
+        }
+        int dstn = nums.length - 1;
+        for(int i = nums.length - 2 ; i >= 0 ; i--){
+            if( i + nums[i] >= dstn){
+                dstn = i;
+            }
+        }        
+        if(dstn==0){
+            return true;
+        }
+        return false;
+    }
+}
