@@ -1,6 +1,22 @@
 class Solution:
     #Solution 1
     def canJump(self, nums: List[int]) -> bool:
+        #Approach: Greedy -- backwards
+        #Time Complexity: O(n)
+        #Space Complexity: O(1)
+        #where, n is the length of nums
+        
+        destination = len(nums) - 1
+        
+        for i in reversed(range(len(nums) - 1)):
+            if i + nums[i] >= destination:
+                destination = i
+        
+        return True if destination == 0 else False
+    
+    #Solution 2
+    """
+    def canJump(self, nums: List[int]) -> bool:
         #Approach: Greedy
         #Time Complexity: O(n)
         #Space Complexity: O(1)
@@ -14,8 +30,9 @@ class Solution:
             idx = max(idx, i + nums[i])
             if idx >= len(nums) - 1:
                 return True
+    """
     
-    #Solution 2
+    #Solution 3
     """
     def canJump(self, nums: List[int]) -> bool:
         #Approach: Dynamic Programming
@@ -37,7 +54,7 @@ class Solution:
         return dp[-1]
     """
     
-    #Solution 3
+    #Solution 4
     """
     def canJump(self, nums: List[int]) -> bool:
         #Approach: Recursion
