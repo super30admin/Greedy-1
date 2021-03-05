@@ -1,0 +1,24 @@
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        
+        # initialize the jumps with 1 and current interval with nums[i]
+        #  and next interval with nums[i]
+        n = len(nums)
+        if(n ==1 and nums[0] >= 0):
+            return 0;
+        next = nums[0]; curr = nums[0]
+        jumps = 1
+        for i in range(1, n):
+            if(i > curr):
+                jumps += 1;
+                curr = next;
+                
+            if(i + nums[i] > next):
+                next = i + nums[i];
+            
+        return jumps;
+    '''
+    time complexity = O(n)
+    spcae complexity = O(1)
+    '''
+        
