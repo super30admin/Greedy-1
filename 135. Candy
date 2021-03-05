@@ -1,0 +1,52 @@
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        # form a ratings list along with index and then sort it based on ratings
+        li = [(ratings[i], i) for i in range(len(ratings))]
+        
+        li = sorted(li)
+        #print(li)
+        # initialize the candies array with 0's
+        candies = [0 for i in range(n)];
+        
+        # iterate through the sorted array
+        for rating, index in li:
+            # both neighbors exists
+            if(index - 1 >= 0 and index + 1 < n):
+                maxneighborratings = max(ratings[index -1], ratings[index + 1]);
+                maxneighborcandies = max(candies[index -1], candies[index + 1]);
+                # check whether the current rating is greater than both of it's enighbros
+                # if then update the candies with max(neighboring cadies) + 1
+                if(ratings[index] > maxneighborratings):
+                    candies[index] = maxneighborcandies + 1;
+                # check whether the current rating is greater than left neighbor
+                elif(ratings[index] > ratings[index - 1]):
+                    candies[index] = candies[index -1] + 1
+                # check whether the current rating is greater than right neighbor
+                elif(ratings[index] > ratings[index + 1]):
+                    candies[index] = candies[index + 1] + 1
+                else:
+                    candies[index] = 1;
+            # no neighor exists
+            elif(index - 1 < 0 and index + 1 >= n):
+                candies[index] = 1;
+            # only right neighbor exists
+            elif(index -1 < 0):
+                if(ratings[index] > ratings[index + 1]):
+                    candies[index] = candies[index + 1] + 1;
+                else:
+                    candies[index] = 1;
+            # only left neighbor exists
+            elif(index + 1 >= n):
+                if(ratings[index] > ratings[index - 1]):
+                    candies[index] = candies[index - 1] + 1;
+                else:
+                    candies[index] = 1;
+        
+        return sum(candies)
+    '''
+    time complexity = O(nlogn)
+    space complexity = O(n)
+    '''
+                
+        
