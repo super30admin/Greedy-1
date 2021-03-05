@@ -1,0 +1,36 @@
+class Solution(object):
+    
+    
+           
+            
+    
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        n = len(nums);
+        # initialize next interval with nums[0]
+        next = nums[0];
+        # iterate from the second element of the nums array
+        for i in range(1, len(nums)):
+            # check if the next interval is less than i
+            # if it is return False
+            if(next < i):
+                return False;
+            # if the sum of current index and maxium jump that can from taken
+            # from that position is greater than next interval.
+            # then change the next interval
+            if(i + nums[i] > next):
+                next = i + nums[i];
+        # return true, if we reach the destination
+        if(next >= n-1):
+            return True;
+        
+        '''
+    time complexity = O(n)
+    spcae complexity = O(1)
+    '''
+                
+                
+        
