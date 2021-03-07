@@ -1,0 +1,24 @@
+class Solution {
+    
+    //55. Jump Game
+    //Time complexity : O(n)
+    //Space complexity : O(1)
+    
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length < 2)
+            return true;
+        
+        int n = nums.length;
+        int destination =n-1;
+        
+        //Start from the end and add index to it's value. This would give the maximum jumps it can take
+        for(int i=n-2; i >=0; i--){
+            
+            if(i+nums[i] >= destination){
+                destination = i;
+            }
+        }
+       return (destination==0);
+        
+    }
+}
