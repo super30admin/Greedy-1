@@ -1,0 +1,32 @@
+class Solution {
+    
+    //135. Candy
+    //Time compelxity : O(n)
+    //Space complexity : O(n)
+    public int candy(int[] ratings) {
+        
+        if(ratings == null || ratings.length ==0)
+            return 0;
+        int[] res = new int[ratings.length];
+        int sum =0;
+        Arrays.fill(res,1);
+        //left pass
+        for(int i =1;i < ratings.length; i++){
+            if(ratings[i] > ratings[i-1]){
+                res[i] = res[i-1]+1;
+            }
+        }
+        
+        //right pass
+        for(int i = ratings.length-2;i>=0;i--){
+            if(ratings[i] > ratings[i+1]){
+               res[i]= Math.max(res[i],res[i+1]+1);
+            }
+        }
+        
+        for(int i : res){
+            sum += i;
+        }
+        return sum;
+    }
+}
