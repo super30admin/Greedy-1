@@ -14,7 +14,7 @@ class Solution:
     
     def canJump(self, nums: List[int]) -> bool:
         
-        if nums == None or len(nums) == 0: return
+        if nums == None or len(nums) < 2: return True
         
         i = 0; max_i = 0
         while i <= max_i:
@@ -23,3 +23,41 @@ class Solution:
             i += 1
             
         return False
+    
+    """
+    # DFS Solution:
+
+    def canJump(self, nums: List[int]) -> bool:
+        
+        if nums == None or len(nums) < 2: return True
+        
+        return self.dfs(nums, 0)
+    
+    def dfs(self, nums, idx):
+        
+        # Base
+        if idx >= len(nums) - 1: return True
+        
+        # Logic
+        for j in range(1, nums[idx] + 1):
+            if self.dfs(nums, j + idx): return True
+        return False
+   
+    # BFS Solution:
+
+    def canJump(self, nums: List[int]) -> bool:
+        
+        if nums == None or len(nums) < 2: return True
+        
+        from collections import deque
+        queue = deque()
+        queue.append((0, nums[0]))
+        
+        while queue:
+            idx, elem = queue.popleft()
+            for j in range(1, elem + 1):
+                if j + idx >= len(nums) - 1: return True
+                queue.append((j + idx, nums[j + idx]))
+                
+        return False
+    """
