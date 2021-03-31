@@ -49,3 +49,52 @@ class Solution {
         
     }
 }
+
+
+/**
+DP solution :
+
+Space complexity : O(N)
+Time Complexity: O(N)
+worked on Leetcode : YES
+**/
+
+class Solution {
+    int memo[];
+    public boolean canJump(int[] nums) {
+        memo  = new int[nums.length];
+        if(nums == null || nums.length <= 1) return true;
+        memo[nums.length-1] = 1;
+        return canReach(0, nums);
+    }
+    
+    private boolean canReach(int index, int[] arr) {
+        
+        if(memo[index]!= 0) {
+            // if memo[index] != 0 that means it can be 
+            // either 1 or -1 if it is 1 we can reach the end 
+            // if it is -1 we can not reach end
+            return memo[index] == 1? true: false;
+        }
+        
+        int currJump = Math.min(index+arr[index] , arr.length-1);
+        
+        for(int j =  index+1; j <= currJump  ; j++) {
+            if(canReach(j, arr)) {
+                memo[j] = 1;
+                return true;
+            }
+        }
+        
+        // you can not reach from this index mark as negative 1
+        memo[index]=-1;
+        // if(memo[index]== -1){
+        //     System.out.println(arr[index]);
+        //     // System.out.print(index);
+        // }
+        return false;
+        
+    }
+}
+
+          
