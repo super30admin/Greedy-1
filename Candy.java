@@ -1,6 +1,6 @@
 class Candy {
 
-    // Time Complexity: O(n) -- O(3n)   (where n -> number of children)
+    // Time Complexity: O(n) -- O(4n)   (where n -> number of children)
     // Space Complexity: O(n)
 
     public int candy(int[] ratings) {
