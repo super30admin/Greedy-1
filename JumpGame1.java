@@ -3,8 +3,23 @@ import java.util.*;
 public class JumpGame1 {
 
 
-    public boolean canJump(int[] nums) {
+    // Start from second last index.
+    // From the current index if can cross the the destination by adding the jumps. ( if it crosses also fine as we can jump by 1 step)
+    // Update the current destination.
+    // And do the same process.
 
+    //TC:O(N) We are iterating the entire array only once.
+    //SC:O(1) We are not using any extra space for calculation.
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length == 0) return false;
+        if(nums.length == 1) return true;
+        int destination = nums.length-1;
+        for(int i=nums.length-2;i>=0;i--) {
+            if(i+nums[i] >= destination) {
+                destination = i; 
+            }
+            if(destination == 0) return true;
+        }
         return false;
     }
 
