@@ -1,0 +1,26 @@
+class Solution {
+    public int candy(int[] ratings) {
+       if(ratings==null || ratings.length==0) return 0;
+        int sum=0;
+        int n=ratings.length;
+        int[] arr=new int[n];
+        Arrays.fill(arr,1);
+        //left pass
+        for(int i=1;i<n;i++){
+            if(ratings[i]>ratings[i-1]){
+                arr[i]=arr[i-1]+1;
+            }
+        }
+        //right pass
+        sum=arr[n-1];
+        for(int j=n-2;j>=0;j--){
+            if(ratings[j]>ratings[j+1]){
+                arr[j]=Math.max(arr[j],arr[j+1]+1);
+            }
+            sum+=arr[j];
+        }
+        return sum;
+    }
+}
+//tc: O(2n)
+//sc: O(n)
