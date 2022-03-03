@@ -1,0 +1,28 @@
+//tc: O(n)
+//sc: O(n)
+//passed on leetcode: yes
+//using a two pass solution --> once comparing if [0] > [1] > [2].. , next comparing if [2] > [1] > [0]
+class Solution {
+    public int candy(int[] ratings) {
+        int n = ratings.length;
+        int sum=0;
+        if (ratings == null || n==0) return sum;
+        int [] candies = new int[n];
+        Arrays.fill(candies,1);
+        //pass from left
+        for(int i = 1; i<n; i++) {
+            if (ratings[i] > ratings[i-1]) {
+                candies[i] = candies[i-1]+1;
+            }
+        }
+        sum = candies[n-1]; //adding the last ele here because in right pass, we do not access candies[n-1], it is just compared
+        //pass from right
+        for (int i = n-2; i>=0; i--){
+             if (ratings[i] > ratings[i+1]) {
+                candies[i] = Math.max(candies[i],candies[i+1]+1); // using max because existing candies can already be maximum
+            }
+            sum += candies[i];
+        }
+        return sum;
+    }
+}
