@@ -17,7 +17,7 @@ public class Candy {
         }
 
         // checking with the right neighbour
-        int sum = result[n - 1];
+        int sum = result[n - 1]; // this we can do at the end also. But doing this here will avoid one more array pass
         for(int i = n - 2; i >= 0; i--) {
             if(ratings[i] > ratings[i + 1]) {
                 result[i] = Math.max(result[i], result[i + 1] + 1); // if we blindly copy the right neighbour and add 1 then
