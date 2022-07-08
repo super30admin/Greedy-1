@@ -26,3 +26,33 @@ class Solution:
             level += 1
             
         return -1
+    
+
+'''
+Using DFS (Pending)
+'''
+    
+    
+'''
+Using Greedy
+Time: O(n)
+Space: O(1)
+'''
+
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return 0
+        
+        n = len(nums)
+        currInt = nums[0]
+        nextInt = nums[0]
+        jumps = 1
+        
+        for i in range(1, n):
+            nextInt = max(nextInt, i + nums[i])
+            if i != n-1 and i == currInt:
+                jumps += 1
+                currInt = nextInt
+        return jumps
+        
