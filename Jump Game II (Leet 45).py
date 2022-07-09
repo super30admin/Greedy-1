@@ -31,7 +31,31 @@ class Solution:
 '''
 Using DFS (Pending)
 '''
-    
+class Solution:
+    def jump(self, nums):
+
+        n = len(nums)
+        self.hm = dict()
+        return self.dfs(nums, n, 0)
+
+    def dfs(self, nums, n, index):
+        # base
+        if index >= n - 1:
+            return 0
+
+        if index in self.hm:
+            return self.hm[index]
+
+        # logic
+        a = 9999
+        for j in range(1, nums[index] + 1):
+            ni = index+j
+            b = self.dfs(nums, n, index + j)
+            a = min(a, b)
+        self.hm[index] = a + 1
+        return self.hm[index]
+
+
     
 '''
 Using Greedy
