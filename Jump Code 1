@@ -1,0 +1,11 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        #TimeComplexity : O(n) , n = number of elements
+        #SpaceComplexity : O(1)
+        r = farthest = 0
+        while r <= farthest:
+            if farthest >= len(nums) - 1:
+                return True
+            farthest = max(farthest, r + nums[r])
+            r += 1
+        return False
