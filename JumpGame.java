@@ -6,7 +6,7 @@
 
 // Your code here along with comments explaining your approach
 //55. Jump Game (Medium) - https://leetcode.com/problems/jump-game/
-// Time Complexity : O(n power k) where n = number of elements, k = average number of decisions ate every node
+// Time Complexity : O(n power k) where n = number of elements, k = average number of decisions at every node
 // Space Complexity : O(n) where n = number of elements
 //class Solution {
 //    public boolean canJump(int[] nums) {
