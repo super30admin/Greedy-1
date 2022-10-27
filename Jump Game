@@ -1,0 +1,13 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)
+        a = 0
+        for i, num in enumerate(nums):
+            if i > a or a >= n - 1:
+                break
+            a = max(a, i + num)
+        return True if a >= n - 1 else False
+    
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+# Successfully implemented on Leetcode
