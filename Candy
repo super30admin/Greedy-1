@@ -1,0 +1,27 @@
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        res = n
+        i = 1
+        while i < n:
+            if ratings[i] == ratings[i-1]:
+                i += 1
+                continue
+            a = 0
+            while ratings[i] > ratings[i-1]:
+                a += 1 
+                res += a
+                i += 1
+                if i == n:
+                    return res
+            b = 0
+            while i< n and ratings[i] < ratings[i-1]:
+                b += 1
+                res += b
+                i += 1
+            res -= min(a,b)
+        return res
+    
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+# Successfully implemented on Leetcode
