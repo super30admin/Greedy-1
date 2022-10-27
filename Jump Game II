@@ -1,0 +1,13 @@
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        res = a = b = 0
+        for i, num in enumerate(nums[:-1]):
+            a = max(a, i + num)
+            if i == b:
+                b = a
+                res += 1
+        return res
+    
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+# Successfully implemented on Leetcode
