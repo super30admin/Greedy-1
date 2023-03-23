@@ -1,0 +1,136 @@
+class Solution {
+    
+    //Approach 4, Greedy Approach
+    //Time Complexity: O(n)
+    //Space Complexity: O(1)
+    
+    public int jump(int[] nums) {
+        
+        if(nums == null || nums.length == 0 || nums.length < 2) return 0;                           //check for null case
+
+        int n = nums.length;                                                                        //store the length
+        int jumps = 1;                                                                              //store the number of min jumps, starting with 1st jump
+        int currentInt = nums[0];                                                                   //store the currentInt means the currentCell from which we are jumping, how many cell we can jump
+        int nextInt = nums[0];                                                                     //store the nextInt means how far we can go
+
+        for(int i=1; i<n; i++){                                                 //iterate through nums array
+
+            nextInt = Math.max(nextInt, nums[i] + i);                           //get the max between old nextInt and nums[i] + i (from currentCell how far can we jump), and update it to the nextInt
+
+            if(i == currentInt && i != n-1){                                    //if i reaches to currentInt (means the cell we are jumping from, we reache to the end, so we have to jump again), also check if i != n-1, means if we reaches to the end, then we don't need to jump
+                currentInt = nextInt;                                           //update the currentInt value to nextInt
+                jumps++;                                                        //increament the jumps counter
+            }
+        }
+        return jumps;                                                           //return jumps
+    }
+
+    
+
+    //Approach 3
+    //BFS
+
+    // public int jump(int[] nums) {
+
+    //     if(nums == null || nums.length == 0 || nums.length <2 ) return 0;
+
+    //     int n = nums.length;
+
+    //     Queue<Integer> queue = new LinkedList<>();
+    //     Set<Integer> set = new HashSet<>();
+        
+    //     queue.add(0);
+    //     set.add(0);
+
+    //     int jumps = 0;
+
+    //     while(!queue.isEmpty()){
+            
+    //         int size = queue.size();
+
+    //         for(int i=0; i<size; i++){
+                
+    //             int curr = queue.poll();
+                
+    //             if(curr >= n-1) return jumps;
+
+    //             for(int j=1; j<=nums[curr]; j++){
+                    
+    //                 int next = curr + j;
+
+    //                 if(!set.contains(next)){
+    //                     set.add(next);
+    //                     queue.add(next);
+    //                 }
+    //             }
+    //         }
+    //         jumps++;
+    //     }   
+    //     return jumps;
+    // }
+
+
+
+    //Approach 2
+    //DFS with dp
+    
+    // Map<Integer, Integer> map;
+
+    // public int jump(int[] nums) {
+
+    //     if(nums == null || nums.length == 0 || nums.length < 2) return 0;
+        
+    //     map = new HashMap<>();
+        
+    //     return dfs(nums, 0); 
+    // }
+
+    // private int dfs(int[] nums, int index){
+
+    //     if(index >= nums.length-1) return 0;
+
+    //     if(map.containsKey(index)) return map.get(index);
+
+    //     int min = 999999;
+
+    //     for(int i=1; i<= nums[index]; i++){
+
+    //         int jumps = dfs(nums, index + i);
+    //         min = Math.min(min, jumps);
+    //     }
+    //     map.put(index, min+1);
+    //     return map.get(index);
+    // }
+
+    
+
+    //Approach 1
+    //DFS, Time Limit Exceed error   
+    
+    // int minJumps;
+
+    // public int jump(int[] nums) {
+
+    //     if(nums == null || nums.length == 0 || nums.length < 2) return 0;
+        
+    //     minJumps = Integer.MAX_VALUE;
+        
+    //     dfs(nums, 0, 0);
+        
+    //     return minJumps;
+    // }
+
+    // private void dfs(int[] nums, int index, int jumps){
+
+    //     if(index >= nums.length-1){
+    //         minJumps = Math.min(minJumps, jumps);
+    //         return;
+    //     }
+
+    //     for(int i=1; i<= nums[index]; i++){
+
+    //         dfs(nums, index + i, jumps+1);
+
+    //     }
+    // }
+}
