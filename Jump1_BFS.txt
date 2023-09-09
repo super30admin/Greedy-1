@@ -1,0 +1,30 @@
+/**
+Time Complexity = O(k^n) where k=max value in num[]
+Space Complexity = O(n)
+ */
+class Solution {
+    public boolean canJump(int[] nums) {
+        if (nums.length <=1) {
+            return true;
+        }
+        Set<Integer> set = new HashSet<>();
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        set.add(0);
+
+        while (!queue.isEmpty()) {
+            int currIdx = queue.poll();
+            for (int j = 1; j <= nums[currIdx]; j++) {
+                int nextIdx = currIdx + j;
+                if (nextIdx >= nums.length -1) {
+                    return true;
+                }
+                if (!set.contains(nextIdx)) {
+                    queue.add(nextIdx);
+                    set.add(nextIdx);
+                }
+            }
+        }
+        return false;
+    }
+}
