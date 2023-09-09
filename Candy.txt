@@ -1,0 +1,30 @@
+/**
+Time Complexity - O(n)
+Space Complexity - O(1)
+ */
+class Solution {
+    public int candy(int[] ratings) {
+        if (ratings == null || ratings.length == 0) {
+            return 0;
+        }
+        int[] res = new int[ratings.length];
+        Arrays.fill(res, 1);
+
+        // give +1 candy if left neighbor is lower in rank
+        for (int i=1; i<ratings.length; i++) {
+            if (ratings[i] > ratings[i-1]) {
+                res[i] = res[i-1] + 1;
+            }
+        }
+
+        int sum = res[res.length-1];
+        // right pass
+        for (int i= res.length -2 ; i >=0 ; i--) {
+            if (ratings[i] > ratings[i+1]) {
+                res[i] = Math.max(res[i], res[i+1] + 1);
+            }
+            sum += res[i];
+        }
+        return sum;
+    }
+}

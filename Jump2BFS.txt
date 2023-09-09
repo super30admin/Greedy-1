@@ -1,0 +1,35 @@
+/**
+Time Complexity - O(k^n) where k = max value in nums
+Space Complexity - O(n)
+ */
+class Solution {
+    public int jump(int[] nums) {
+        if (nums == null ) {
+            return 0;
+        }
+        Set<Integer> set = new HashSet<>();
+        Queue<Integer> q = new LinkedList<>();
+        q.add(0);
+        set.add(0);
+        int jumps = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i=0; i<size; i++) {
+                int idx = q.poll();
+                
+                if (idx == nums.length-1) {
+                    return jumps;
+                }
+                for (int j =1 ; j<=nums[idx]; j++) {
+                    int nextIdx = j + idx;
+                   if (!set.contains(nextIdx)) {
+                    q.add(nextIdx);
+                    set.add(nextIdx);
+                   }
+                }
+            }
+            jumps++;
+        }
+        return -1;
+    }
+}
