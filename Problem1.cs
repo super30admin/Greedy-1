@@ -8,9 +8,9 @@ public class Solution
         {
             if (nums.Length == 1) return true;
             int target = nums.Length - 1;
-            for(int i = nums.Length - 2; i > 0; i--)
+            for(int i = nums.Length - 2; i >= 0; i--)
             {
-                if (nums[i] + i > target)
+                if (nums[i] + i >= target)
                     target = i;
             }
             
