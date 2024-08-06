@@ -1,0 +1,53 @@
+T.c --> O(n) , S.c --> O(n)
+
+class Solution {
+    public int jump(int[] nums) {
+        if(nums.length ==1){
+            return 0;
+        }
+        Queue<Integer> q = new LinkedList<>();
+        q.add(0);
+        HashSet<Integer>  visited = new HashSet<>();
+        int level = 0;
+        while(!q.isEmpty()){
+          int size = q.size();          
+          for(int i =0; i<size; i++){
+            int curr = q.poll();            
+             for(int j =1; j<=nums[curr]; j++){
+                int jump = curr+j;
+                if(jump == nums.length -1){
+                    return level+1;  
+                }
+                if(!visited.contains(jump)){
+                    q.add(jump);
+                    visited.add(jump);
+                }
+             }
+          }
+          level++;
+        }
+        return -1;
+    }
+}
+
+***********************************************************************
+T.c --> O(n) , S.c --> O(1)
+
+class Solution {
+    public int jump(int[] nums) {
+        if(nums.length == 1){
+            return 0;
+        }
+        int currIndex = nums[0];
+        int nextIndex = nums[0];
+        int jump =1;
+       for(int i =0; i<nums.length; i++){
+          nextIndex = Math.max(nextIndex, nums[i]+i);
+          if(i < nums.length-1 && i == currIndex){
+            currIndex = nextIndex;
+            jump++;
+          }
+       }  
+       return jump;
+    }
+}
