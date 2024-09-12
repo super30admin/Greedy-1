@@ -1,0 +1,25 @@
+Time complexity: O(n)
+Space complexity: O(1)
+Did this code successfully submitted on leetcode: Yes
+
+class Solution {
+    public int jump(int[] nums) {
+        
+        if(nums==null || nums.length==0 || nums.length==1)
+            return 0;
+        
+        int currInterval = nums[0];
+        int nextInterval = nums[0];
+        int jump = 1;
+        
+        for(int i=1; i<=nums.length-1; i++){
+            nextInterval = Math.max(nextInterval, i+nums[i]);
+            
+            if(i<nums.length-1 && i==currInterval){
+                currInterval = nextInterval;
+                jump++;
+            }
+        }
+        return jump;
+    }
+}
