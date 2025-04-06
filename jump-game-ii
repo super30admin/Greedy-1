@@ -1,0 +1,110 @@
+// Time Complexity :O(n*k)
+// Space Complexity :O(n)+O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:BFS
+
+class Solution {
+    public int jump(int[] nums) {
+        int n = nums.length;
+        if (n < 2) {
+            return 0;
+        }
+        Queue<Integer> qu = new LinkedList<>();
+        HashSet<Integer> set = new HashSet<>();
+        qu.add(0);
+        set.add(0);
+        int jumps = 1;
+        while (!qu.isEmpty()) {
+            int size = qu.size();
+            for (int k = 0; k < size; k++) {
+                int i = qu.poll();
+                int val = nums[i];
+                for (int j = 1; j <= val; j++) {
+                    int newIdx = i + j;
+                    if (newIdx >= n - 1) {
+                        return jumps;
+                    }
+                    if (!set.contains(newIdx)) {
+                        qu.add(newIdx);
+                        set.add(newIdx);
+                    }
+                }
+            }
+            jumps++;
+        }
+        return 5678;
+    }
+}
+
+
+
+// Time Complexity :O(n^k) k is max numbe rof catches at each index
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:BFS
+
+class Solution {
+    public int jump(int[] nums) {
+       int n = nums.length;
+       if (n < 2) {
+           return 0;
+       }
+       // int[] memo = new int[10000];
+         HashMap<Integer,Integer> memo = new HashMap<>();
+       // Arrays.fill(memo,-1);
+       return helper(nums, 0,memo);
+   }
+
+   public int helper(int[] nums, int i,HashMap<Integer,Integer> memo) {
+       if (i >= nums.length - 1) {
+           return 0;
+       }
+       if( memo.containsKey(i)){
+           System.out.println("memo"+memo+"i"+i);
+           return memo.get(i);
+       }
+       int val = nums[i];
+        int mincount =99999;
+        for (int j = 1; j <= val; j++) {
+           int newIdx = i + j;
+           int babyJumps = helper(nums, newIdx, memo);
+           mincount = Math.min(mincount, babyJumps);
+       }
+      memo.put(i,mincount+1);
+       return mincount + 1;
+   }
+}
+
+
+// Time Complexity :O(n) 
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:Greedy forward
+
+class Solution {
+    public int jump(int[] nums) {
+        int n = nums.length;
+        if (n < 2) {
+            return 0;
+        }
+        int currItr = nums[0];
+        int nextItr = nums[0];
+        int jumps = 1;
+        for (int i = 1; i < n; i++) {
+            if (currItr >= n - 1) {
+                return jumps;
+            }
+            nextItr = Math.max(nextItr, i + nums[i]);
+            if (i == currItr) {
+                currItr = nextItr;
+                jumps++;
+            }
+        }
+        return 23456;
+
+    }
+}

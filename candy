@@ -1,0 +1,83 @@
+// Time Complexity :O(2n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:two pass algorithm
+class Solution {
+
+    public int candy(int[] ratings) {
+        int n=ratings.length;
+        int[] result = new int[n];
+        Arrays.fill(result, 1);//initially distributing signle coin to each 
+        int count;
+        for (int i = 1; i < n; i++) {
+            int curr = ratings[i];
+            int prev = ratings[i - 1];
+            if (curr > prev) {//based on left rating incremenint curr candy count
+                result[i] = result[i-1] + 1;
+            }
+        }
+        count = result[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            int curr = ratings[i];
+            int prev = ratings[i + 1];
+            if (curr > prev) {//based on right rating taking max between  curr and right +1 candy count
+                result[i] = Math.max(result[i], result[i + 1] + 1);
+                }
+              count += result[i];
+        }
+           return count;
+    }
+}
+
+
+
+
+
+
+
+// Time Complexity :O(n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+class Solution {
+    public int total(int count) {
+        return (count * (count + 1)) / 2;
+    }
+
+    public int candy(int[] ratings) {
+        int n = ratings.length;
+        int candies = 1;
+        int oldSlope = 0;
+        int newSlope = 0;
+        int up = 0;
+        int down = 0;
+        for (int i = 1; i < n; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                newSlope = 1;//up slope
+            } else if (ratings[i] < ratings[i - 1]) {
+                newSlope = -1;//down slope
+            } else {
+                newSlope = 0;//no slope
+            }
+            //if trough happens
+            if ((newSlope >= 0 && oldSlope < 0) || (newSlope == 0 && oldSlope > 0)) {
+                candies += total(up) + total(down) + Math.max(up, down);
+                up = 0;//resetting both up and down
+                down = 0;
+            }
+            if (newSlope > 0) {//if up slope
+                up++;
+            } else if (newSlope < 0) {//if down slope
+                down++;
+            } else {
+                candies++;//if no slope just add one candie
+            }
+            oldSlope = newSlope;//updating old slope to new slope
+        }
+        candies += total(up) + total(down) + Math.max(up, down);after calculating trough to calculate     remaining slope at the end
+        return candies;
+    }
+}
