@@ -1,0 +1,101 @@
+##problem 1
+class Solution {
+
+    public boolean canJump(int[] nums) {
+
+        if(nums.length == 1) return true;
+
+        int n = nums.length;
+
+        int target = n - 1;
+
+        for(int i = n-2; i >= 0; i--){
+
+            if(i + nums[i] >= target){
+
+                target = i;
+
+            }
+
+        }
+
+        return target == 0;
+
+    }
+
+}
+
+
+##problem 2
+
+
+
+class Solution {
+
+    int noOfJumps=Integer.MAX_VALUE;
+  
+    public int jump(int[] nums) {
+  
+        if(nums.length==0 || nums.length<2) return 0;
+  
+        dfs(nums,0,0);
+  
+        return noOfJumps;
+  
+    }
+  
+    public void dfs(int[] nums,int i,int jumps)
+  
+    {
+  
+        if(i>= nums.length-1) {
+  
+            noOfJumps=Math.min(noOfJumps,jumps);
+  
+            return;
+  
+        }
+  
+       
+  
+        for(int j=1;j<=nums[i];j++)
+  
+        {
+  
+            dfs(nums,i+j,jumps+1);
+  
+        }
+  
+    }
+  
+  }
+
+##problem 3
+
+
+  class Solution {
+    public int candy(int[] ratings) {
+    int n = ratings.length;
+    int[] candies = new int[n];
+    Arrays.fill(candies, 1); // Step 1
+
+    // Step 2: Left to Right
+    for (int i = 1; i < n; i++) {
+        if (ratings[i] > ratings[i - 1]) {
+            candies[i] = candies[i - 1] + 1;
+        }
+    }
+
+    // Step 3: Right to Left
+    for (int i = n - 2; i >= 0; i--) {
+        if (ratings[i] > ratings[i + 1]) {
+            candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+        }
+    }
+
+    int totalCandies = 0;
+    for (int c : candies) totalCandies += c;
+
+    return totalCandies;
+}
+}
