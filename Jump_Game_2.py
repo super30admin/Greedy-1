@@ -12,15 +12,16 @@
 
 
 class Solution:
-    def jump(self, nums: List[int]) -> int:
-        if not nums or len(nums) == 1:
+    def jump(self, nums: list[int]) -> int:
+        if len(nums) == 1:
             return 0
+        maxReach = 0
         jumps = 1
-        currInterval = nums[0]
-        nextInterval = nums[0]
+        currInt = nums[0]
+        nextInt = nums[0]
         for i in range(1, len(nums)):
-            nextInterval = max(nums[i] + i, nextInterval)
-            if currInterval == i and i < len(nums) - 1:
+            nextInt = max(nextInt, nums[i] + i)
+            if i != len(nums)-1 and i == currInt:
                 jumps += 1
-                currInterval = nextInterval
+                currInt = nextInt
         return jumps
