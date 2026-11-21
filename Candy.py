@@ -1,5 +1,5 @@
-# Time Complexity : O(N) Two pass
-# Space Complexity : O(N)
+# Time Complexity : O(N)
+# Space Complexity : O(1)
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 
@@ -10,21 +10,48 @@
 # Right pass - Iterate over the ratings array from second last index and check if the current element is greater than the next element
 # If it is greater then update the current index in candies array by taking the maximum between current candies and next element in candies + 1
 # Return sum of candies array
+# Another Approach using up and down when the ratings increase we add up + 1 and when ratings decrease we add down + 1
+# Initially set sum to len(ratings) that is n and i = 0 and while i < n we check if the ratings are equal we just increment i and coninue
+# Initialize up to 0 and while ratings > previous ratings then we increment up by 1 and i by 1 and add up to sum
+# Same for down if ratings < previous ratings then we increment down by 1 and i by 1 and add down to sum
+# Then decrease sum by min(up,down)
+# Return sum
 
 
 class Solution:
-    def candy(self, ratings: List[int]) -> int:
-        if not ratings:
-            return 0
-        candies = [1] * len(ratings)
-        # left pass
-        for i in range(1, len(ratings)):
-            if ratings[i] > ratings[i - 1]:
-                candies[i] = candies[i - 1] + 1
+    def candy(self, ratings: list[int]) -> int:
+        n = len(ratings)
+        result = [1] * n
+        sum = 0
+        for i in range(1, n):
+            if ratings[i] > ratings[i-1]:
+                result[i] = result[i-1] + 1
+        sum = result[n-1]
+        for i in range(n-2, -1, -1):
+            if ratings[i] > ratings[i+1]:
+                result[i] = max(result[i+1] + 1, result[i])
+            sum += result[i]
+        return sum
+#2 Pass algorithm
 
-        # right pass
-        for i in range(len(ratings) - 2, -1, -1):
-            if ratings[i] > ratings[i + 1]:
-                candies[i] = max(candies[i], candies[i + 1] + 1)
-
-        return sum(candies)
+class Solution:
+    def candy(self, ratings: list[int]) -> int:
+        n = len(ratings)
+        sum = n
+        i = 1
+        while i < n:
+            if ratings[i] == ratings[i-1]:
+                i += 1
+                continue
+            up = 0
+            while i < n and ratings[i] > ratings[i-1]:
+                up += 1
+                i += 1
+                sum += up
+            down = 0
+            while i < n and ratings[i] < ratings[i-1]:
+                down += 1
+                i += 1
+                sum += down
+            sum -= min(up, down)
+        return sum
